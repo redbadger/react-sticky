@@ -1,7 +1,7 @@
 {
-  "name": "react-sticky",
-  "version": "5.0.5",
-  "description": "Sticky component for React",
+  "name": "react-sticky-plus",
+  "version": "1.0.0",
+  "description": "Sticky component for React (fork of react-sticky)",
   "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf lib dist",
@@ -21,6 +21,9 @@
     "Sticky"
   ],
   "author": "Captivation Software",
+  "contributors": [
+    "Nikita Gushchin"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/captivationsoftware/react-sticky/issues"
