@@ -312,7 +312,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this.on(['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'], this.recomputeState);
+	      this.on(['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'], this.handleRecomputateEvents);
 	      this.recomputeState();
 	    }
 	  }, {
@@ -323,7 +323,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
-	      this.off(['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'], this.recomputeState);
+	      this.off(['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'], this.handleRecomputateEvents);
 	      this.channel.unsubscribe(this.updateContext);
 	    }
 	  }, {
@@ -539,6 +539,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _initialiseProps = function _initialiseProps() {
 	  var _this3 = this;
+
+	  this.handleRecomputateEvents = function () {
+	    return _this3.recomputeState();
+	  };
 
 	  this.updateContext = function (_ref) {
 	    var inherited = _ref.inherited;
