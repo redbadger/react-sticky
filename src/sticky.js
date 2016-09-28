@@ -42,7 +42,7 @@ export default class Sticky extends React.Component {
   }
 
   componentDidMount() {
-    this.on(['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'], this.recomputeState);
+    this.on(['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'], this.handleRecomputateEvents);
     this.recomputeState();
   }
 
@@ -51,7 +51,7 @@ export default class Sticky extends React.Component {
   }
 
   componentWillUnmount() {
-    this.off(['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'], this.recomputeState);
+    this.off(['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'], this.handleRecomputateEvents);
     this.channel.unsubscribe(this.updateContext);
   }
 
@@ -103,6 +103,10 @@ export default class Sticky extends React.Component {
     }
 
     return props.position === 'top' ? this.isStickyTop(props, state) : this.isStickyBottom(props, state);
+  }
+
+  handleRecomputateEvents = () => {
+    return this.recomputeState()
   }
 
   updateContext = ({ inherited, node }) => {
