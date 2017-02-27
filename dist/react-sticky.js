@@ -302,11 +302,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var _this2 = this;
-
-	      this.on(['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'], function () {
-	        return _this2.recomputeState();
-	      });
+	      this.on(['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'], this.onEvent);
 	      this.recomputeState();
 	    }
 	  }, {
@@ -317,11 +313,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
-	      var _this3 = this;
-
-	      this.off(['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'], function () {
-	        return _this3.recomputeState();
-	      });
+	      this.off(['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'], this.onEvent);
 	      this.channel.unsubscribe(this.updateContext);
 	    }
 	  }, {
@@ -403,7 +395,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'shouldComponentUpdate',
 	    value: function shouldComponentUpdate(newProps, newState) {
-	      var _this4 = this;
+	      var _this2 = this;
 
 	      // Have we changed the number of props?
 	      var propNames = Object.keys(this.props);
@@ -411,7 +403,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      // Have we changed any prop values?
 	      var valuesMatch = propNames.every(function (key) {
-	        return newProps.hasOwnProperty(key) && newProps[key] === _this4.props[key];
+	        return newProps.hasOwnProperty(key) && newProps[key] === _this2.props[key];
 	      });
 	      if (!valuesMatch) return true;
 
@@ -539,55 +531,59 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	var _initialiseProps = function _initialiseProps() {
-	  var _this5 = this;
+	  var _this3 = this;
+
+	  this.onEvent = function () {
+	    _this3.recomputeState();
+	  };
 
 	  this.updateContext = function (_ref) {
 	    var inherited = _ref.inherited,
 	        node = _ref.node;
 
-	    _this5.containerNode = node;
-	    _this5.recomputeState(_this5.props, inherited);
+	    _this3.containerNode = node;
+	    _this3.recomputeState(_this3.props, inherited);
 	  };
 
 	  this.recomputeState = function () {
-	    var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _this5.props;
+	    var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _this3.props;
 	    var inherited = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-	    var nextState = _extends({}, _this5.state, {
-	      height: _this5.getHeight(),
-	      width: _this5.getWidth(),
-	      xOffset: _this5.getXOffset(),
-	      containerOffset: inherited === false ? _this5.state.containerOffset : inherited,
-	      containerBottom: _this5.getContainerRect().bottom,
-	      containerTop: _this5.getContainerRect().top,
-	      placeholderTop: _this5.getPlaceholderRect().top,
+	    var nextState = _extends({}, _this3.state, {
+	      height: _this3.getHeight(),
+	      width: _this3.getWidth(),
+	      xOffset: _this3.getXOffset(),
+	      containerOffset: inherited === false ? _this3.state.containerOffset : inherited,
+	      containerBottom: _this3.getContainerRect().bottom,
+	      containerTop: _this3.getContainerRect().top,
+	      placeholderTop: _this3.getPlaceholderRect().top,
 	      winHeight: window.innerHeight
 	    });
 
-	    var isSticky = _this5.isSticky(props, nextState);
+	    var isSticky = _this3.isSticky(props, nextState);
 	    var finalNextState = _extends({}, nextState, { isSticky: isSticky });
-	    var hasChanged = _this5.state.isSticky !== isSticky;
+	    var hasChanged = _this3.state.isSticky !== isSticky;
 
-	    _this5.setState(finalNextState, function () {
+	    _this3.setState(finalNextState, function () {
 	      // After component did update lets broadcast update msg to channel
 	      if (hasChanged) {
-	        if (_this5.channel) {
-	          _this5.channel.update(function (data) {
-	            data.offset = isSticky ? _this5.state.height : 0;
+	        if (_this3.channel) {
+	          _this3.channel.update(function (data) {
+	            data.offset = isSticky ? _this3.state.height : 0;
 	          });
 	        }
 
-	        _this5.props.onStickyStateChange(isSticky);
+	        _this3.props.onStickyStateChange(isSticky);
 	      }
 	    });
 	  };
 
 	  this.setChildrenRef = function (children) {
-	    _this5.children = children;
+	    _this3.children = children;
 	  };
 
 	  this.setPlaceholderRef = function (placeholder) {
-	    _this5.placeholder = placeholder;
+	    _this3.placeholder = placeholder;
 	  };
 	};
 

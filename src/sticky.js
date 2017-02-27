@@ -41,7 +41,7 @@ export default class Sticky extends React.Component {
   }
 
   componentDidMount() {
-    this.on(['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'], () => this.recomputeState());
+    this.on(['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'], this.onEvent);
     this.recomputeState();
   }
 
@@ -50,8 +50,12 @@ export default class Sticky extends React.Component {
   }
 
   componentWillUnmount() {
-    this.off(['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'], () => this.recomputeState());
+    this.off(['resize', 'scroll', 'touchstart', 'touchmove', 'touchend', 'pageshow', 'load'], this.onEvent);
     this.channel.unsubscribe(this.updateContext);
+  }
+
+  onEvent = () => {
+    this.recomputeState();
   }
 
   getXOffset() {
