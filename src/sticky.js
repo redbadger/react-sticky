@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 export default class Sticky extends React.Component {
 
@@ -56,19 +55,19 @@ export default class Sticky extends React.Component {
   }
 
   getXOffset() {
-    return this.refs.placeholder.getBoundingClientRect().left;
+    return this.placeholder.getBoundingClientRect().left;
   }
 
   getWidth() {
-    return this.refs.placeholder.getBoundingClientRect().width;
+    return this.placeholder.getBoundingClientRect().width;
   }
 
   getHeight() {
-    return ReactDOM.findDOMNode(this.refs.children).getBoundingClientRect().height;
+    return this.children.getBoundingClientRect().height;
   }
 
   getPlaceholderRect() {
-    return this.refs.placeholder.getBoundingClientRect();
+    return this.placeholder.getBoundingClientRect();
   }
 
   getContainerRect() {
@@ -196,6 +195,14 @@ export default class Sticky extends React.Component {
       : Math.min(containerOffset, topLimit)
   }
 
+  setChildrenRef = (children) => {
+    this.children = children;
+  };
+
+  setPlaceholderRef = (placeholder) => {
+    this.placeholder = placeholder;
+  };
+
   /*
    * The special sauce.
    */
@@ -239,11 +246,10 @@ export default class Sticky extends React.Component {
       ...(finalStickyStyle || {})
     }
 
-
     return (
       <div>
-        <div ref="placeholder" style={placeholderStyle} />
-        <div {...props} ref="children" className={className} style={finalStyle}>
+        <div ref={this.setPlaceholderRef} style={placeholderStyle} />
+        <div {...props} ref={this.setChildrenRef} className={className} style={finalStyle}>
           {this.props.children}
         </div>
       </div>

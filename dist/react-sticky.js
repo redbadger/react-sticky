@@ -7,7 +7,7 @@
 		exports["ReactSticky"] = factory(require("react"), require("react-dom"));
 	else
 		root["ReactSticky"] = factory(root["React"], root["ReactDOM"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_5__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -61,11 +61,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.Channel = exports.StickyContainer = exports.Sticky = undefined;
 
-	var _sticky = __webpack_require__(5);
+	var _sticky = __webpack_require__(4);
 
 	var _sticky2 = _interopRequireDefault(_sticky);
 
-	var _container = __webpack_require__(4);
+	var _container = __webpack_require__(3);
 
 	var _container2 = _interopRequireDefault(_container);
 
@@ -126,12 +126,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 3 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
-
-/***/ },
-/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -146,7 +140,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(3);
+	var _reactDom = __webpack_require__(5);
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -256,7 +250,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = exports['default'];
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -272,10 +266,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(3);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -337,22 +327,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'getXOffset',
 	    value: function getXOffset() {
-	      return this.refs.placeholder.getBoundingClientRect().left;
+	      return this.placeholder.getBoundingClientRect().left;
 	    }
 	  }, {
 	    key: 'getWidth',
 	    value: function getWidth() {
-	      return this.refs.placeholder.getBoundingClientRect().width;
+	      return this.placeholder.getBoundingClientRect().width;
 	    }
 	  }, {
 	    key: 'getHeight',
 	    value: function getHeight() {
-	      return _reactDom2.default.findDOMNode(this.refs.children).getBoundingClientRect().height;
+	      return this.children.getBoundingClientRect().height;
 	    }
 	  }, {
 	    key: 'getPlaceholderRect',
 	    value: function getPlaceholderRect() {
-	      return this.refs.placeholder.getBoundingClientRect();
+	      return this.placeholder.getBoundingClientRect();
 	    }
 	  }, {
 	    key: 'getContainerRect',
@@ -463,13 +453,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      return position === 'top' ? Math.min(containerOffset, bottomLimit) : Math.min(containerOffset, topLimit);
 	    }
+	  }, {
+	    key: 'render',
+
 
 	    /*
 	     * The special sauce.
 	     */
-
-	  }, {
-	    key: 'render',
 	    value: function render() {
 	      var _extends2;
 
@@ -509,10 +499,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement('div', { ref: 'placeholder', style: placeholderStyle }),
+	        _react2.default.createElement('div', { ref: this.setPlaceholderRef, style: placeholderStyle }),
 	        _react2.default.createElement(
 	          'div',
-	          _extends({}, props, { ref: 'children', className: className, style: finalStyle }),
+	          _extends({}, props, { ref: this.setChildrenRef, className: className, style: finalStyle }),
 	          this.props.children
 	        )
 	      );
@@ -591,10 +581,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    });
 	  };
+
+	  this.setChildrenRef = function (children) {
+	    _this5.children = children;
+	  };
+
+	  this.setPlaceholderRef = function (placeholder) {
+	    _this5.placeholder = placeholder;
+	  };
 	};
 
 	exports.default = Sticky;
 	module.exports = exports['default'];
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
 
 /***/ }
 /******/ ])
