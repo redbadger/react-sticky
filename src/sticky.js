@@ -202,10 +202,14 @@ export default class Sticky extends React.Component {
   render() {
     const {
       className: propsClassName,
+      bottomOffset,		
+      isActive,		
+      onStickyStateChange,
       position,
       stickyClassName,
-      stickyStyle,
+      stickyStyle,		
       style,
+      topOffset,		
       ...props
     } = this.props;
     const {

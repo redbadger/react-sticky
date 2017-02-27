@@ -171,8 +171,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var _this = _possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).call(this, props));
 
 	    _this.updateOffset = function (_ref) {
-	      var inherited = _ref.inherited;
-	      var offset = _ref.offset;
+	      var inherited = _ref.inherited,
+	          offset = _ref.offset;
 
 	      _this.channel.update(function (data) {
 	        data.inherited = inherited + offset;
@@ -366,10 +366,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'isStickyBottom',
 	    value: function isStickyBottom(props, state) {
 	      var bottomOffset = props.bottomOffset;
-	      var containerOffset = state.containerOffset;
-	      var height = state.height;
-	      var placeholderTop = state.placeholderTop;
-	      var winHeight = state.winHeight;
+	      var containerOffset = state.containerOffset,
+	          height = state.height,
+	          placeholderTop = state.placeholderTop,
+	          winHeight = state.winHeight;
 
 
 	      var bottomBreakpoint = containerOffset - bottomOffset;
@@ -447,15 +447,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'getPositionOffset',
 	    value: function getPositionOffset() {
-	      var _state = this.state;
-	      var containerOffset = _state.containerOffset;
-	      var containerTop = _state.containerTop;
-	      var containerBottom = _state.containerBottom;
-	      var height = _state.height;
-	      var _props = this.props;
-	      var bottomOffset = _props.bottomOffset;
-	      var position = _props.position;
-	      var topOffset = _props.topOffset;
+	      var _state = this.state,
+	          containerOffset = _state.containerOffset,
+	          containerTop = _state.containerTop,
+	          containerBottom = _state.containerBottom,
+	          height = _state.height;
+	      var _props = this.props,
+	          bottomOffset = _props.bottomOffset,
+	          position = _props.position,
+	          topOffset = _props.topOffset;
 
 
 	      var bottomLimit = containerBottom - height - bottomOffset;
@@ -473,20 +473,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function render() {
 	      var _extends2;
 
-	      var _props2 = this.props;
-	      var propsClassName = _props2.className;
-	      var position = _props2.position;
-	      var stickyClassName = _props2.stickyClassName;
-	      var stickyStyle = _props2.stickyStyle;
-	      var style = _props2.style;
+	      var _props2 = this.props,
+	          propsClassName = _props2.className,
+	          bottomOffset = _props2.bottomOffset,
+	          isActive = _props2.isActive,
+	          onStickyStateChange = _props2.onStickyStateChange,
+	          position = _props2.position,
+	          stickyClassName = _props2.stickyClassName,
+	          stickyStyle = _props2.stickyStyle,
+	          style = _props2.style,
+	          topOffset = _props2.topOffset,
+	          props = _objectWithoutProperties(_props2, ['className', 'bottomOffset', 'isActive', 'onStickyStateChange', 'position', 'stickyClassName', 'stickyStyle', 'style', 'topOffset']);
 
-	      var props = _objectWithoutProperties(_props2, ['className', 'position', 'stickyClassName', 'stickyStyle', 'style']);
-
-	      var _state2 = this.state;
-	      var isSticky = _state2.isSticky;
-	      var height = _state2.height;
-	      var width = _state2.width;
-	      var xOffset = _state2.xOffset;
+	      var _state2 = this.state,
+	          isSticky = _state2.isSticky,
+	          height = _state2.height,
+	          width = _state2.width,
+	          xOffset = _state2.xOffset;
 
 
 	      var placeholderStyle = { paddingBottom: isSticky ? height : 0 };
@@ -549,16 +552,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var _this5 = this;
 
 	  this.updateContext = function (_ref) {
-	    var inherited = _ref.inherited;
-	    var node = _ref.node;
+	    var inherited = _ref.inherited,
+	        node = _ref.node;
 
 	    _this5.containerNode = node;
 	    _this5.recomputeState(_this5.props, inherited);
 	  };
 
 	  this.recomputeState = function () {
-	    var props = arguments.length <= 0 || arguments[0] === undefined ? _this5.props : arguments[0];
-	    var inherited = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+	    var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _this5.props;
+	    var inherited = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
 	    var nextState = _extends({}, _this5.state, {
 	      height: _this5.getHeight(),
